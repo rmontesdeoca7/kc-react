@@ -26,8 +26,8 @@ function App() {
                 </RequireAuth>
               }
             />
-          </Route>
-          <Route path="/" element={<Navigate to="/tweets" />} /> */}
+          </Route> */}
+          <Route path="/" element={<Navigate to="/login" />} />
           <Route path="/404" element={<div>404 | Not found</div>} />
           <Route path="*" element={<Navigate to="/404" />} />
         </Routes>

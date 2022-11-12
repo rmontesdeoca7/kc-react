@@ -8,7 +8,7 @@ import { login } from './service';
 import './LoginPage.css';
 
 const LoginPage = () => {
-  const [username, setUsername] = useState('');
+  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState(null);
   const [isFetching, setIsFetching] = useState(false);
@@ -16,7 +16,7 @@ const LoginPage = () => {
   const navigate = useNavigate();
   const { handleLogin } = useAuth();
 
-  const handleChangeUsername = event => setUsername(event.target.value);
+  const handleChangeemail = event => setEmail(event.target.value);
   const handleChangePassword = event => setPassword(event.target.value);
   const resetError = () => setError(null);
 
@@ -26,15 +26,9 @@ const LoginPage = () => {
     try {
       resetError();
       setIsFetching(true);
-      await login({ username, password });
+      await login({ email, password });
       handleLogin();
       const to = location.state?.from?.pathname || '/';
-
-      // const to =
-      //   (location.state &&
-      //     location.state.from &&
-      //     location.state.from.pathname) ||
-      //   '/';
 
       navigate(to, { replace: true });
     } catch (error) {
@@ -43,11 +37,9 @@ const LoginPage = () => {
     }
   };
 
-  console.log('render ');
   const isButtonEnabled = useMemo(() => {
-    console.log('calculating');
-    return username && password && !isFetching;
-  }, [username, password, isFetching]);
+    return email && password && !isFetching;
+  }, [email, password, isFetching]);
 
   return (
     <div className="loginPage">
@@ -55,11 +47,11 @@ const LoginPage = () => {
       <form onSubmit={handleSubmit}>
         <FormField
           type="text"
-          name="username"
-          label="phone, email or username"
+          name="email"
+          label="Email"
           className="loginForm-field"
-          onChange={handleChangeUsername}
-          value={username}
+          onChange={handleChangeemail}
+          value={email}
         />
         <FormField
           type="password"
